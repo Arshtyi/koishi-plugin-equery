@@ -96,7 +96,6 @@ export async function query(
     room: string,
     synjonesAuth: string
 ): Promise<PluginResponse> {
-    // 检查API密钥是否有效
     if (!synjonesAuth || synjonesAuth.trim() === "") {
         return failure(
             "配置错误",
@@ -134,10 +133,8 @@ export async function query(
             { headers: HEADERS }
         );
 
-        // 添加调试信息，确认数据结构
         console.log("响应数据结构:", JSON.stringify(response.data));
 
-        // 检查response.data.map和showData存在
         if (
             !response.data ||
             !response.data.map ||
@@ -149,18 +146,13 @@ export async function query(
         }
 
         try {
-            // 获取电量信息字符串
             const electricityInfo = response.data.map.showData["信息"];
-            console.log("原始电量信息:", electricityInfo); // 例如: "房间当前剩余电量360.73"
+            console.log("原始电量信息:", electricityInfo);
 
-            // 从字符串中提取电量值部分
-            const result = electricityInfo.substring(8); // 截取 "房间当前剩余电量" 后面的部分
-            console.log("解析到的电量值:", result); // 例如: "360.73"
-
-            // 获取更多房间信息
+            const result = electricityInfo.substring(8);
+            console.log("解析到的电量值:", result);
             const roomInfo = response.data.map.data;
 
-            // 构造返回对象
             const returnValue = {
                 success: true,
                 message: result,

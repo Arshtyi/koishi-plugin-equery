@@ -1,7 +1,7 @@
 {
     "name": "koishi-plugin-equery",
     "description": "山东大学青岛校区宿舍剩余电量查询",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "main": "lib/index.js",
     "typings": "lib/index.d.ts",
     "files": [
